@@ -6,7 +6,7 @@ const port = 3000;
 
 const server = http.createServer((req, res) => {
   if (req.url === '/neko' && req.method === 'GET') {
-    const url = 'https://api.waifu.pics/sfw/neko';
+    const url = 'https://api.waifu.pics/sfw';
 
     https.get(url, (response) => {
       let data = '';
