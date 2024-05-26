@@ -1,36 +1,21 @@
 const http = require('http');
-const https = require('https');
+const anime = require('./anime'); // anime.js dosyasını içe aktar
 
-const hostname = 'https://chapii.vercel.app/';
+const hostname = '127.0.0.1';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-   if (req.url === '/docs/api/waifu' && req.method === 'GET') {
-      const url = 'https://api.waifu.pics/nsfw/waifu';
-      
-    https.get(url, (response) => {
-      let data = '';
-
-      response.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      response.on('end', () => {
-        try {
-          const result = JSON.parse(data);
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify(result));
-        } catch (error) {
-          console.error('JSON parse hatası:', error);
-          res.statusCode = 500;
-          res.end('Internal Server Error');
-        }
-      });
-    }).on('error', (error) => {
-      console.error('Hata:', error.message);
-      res.statusCode = 500;
-      res.end('Internal Server Error');
+  if (req.url === '/neko' && req.method === 'GET') {
+    anime.getAnimeImage((error, result) => {
+      if (error) {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Internal Server Error');
+      } else {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(result));
+      }
     });
   } else {
     res.statusCode = 404;
