@@ -5,8 +5,11 @@ const hostname = 'https://chapii.vercel.app/';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/neko' && req.method === 'GET') {
-    const url = 'https://api.waifu.pics/nsfw/neko';
+   if (req.method === 'GET') {
+    if (req.url === '/docs/api/neko') { const url = 'https://api.waifu.pics/nsfw/neko'; }
+    if (req.url === '/docs/api/waifu') { const url = 'https://api.waifu.pics/nsfw/waifu'; }
+    if (req.url === '/docs/api/trap') { const url = 'https://api.waifu.pics/nsfw/trap'; }
+    if (req.url === '/docs/api/blowjob') { const url = 'https://api.waifu.pics/nsfw/blowjob'; }
 
     https.get(url, (response) => {
       let data = '';
