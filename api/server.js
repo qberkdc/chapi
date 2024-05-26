@@ -5,8 +5,8 @@ const hostname = 'https://chapii.vercel.app/';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/' && req.method === 'GET') {
-    const url = 'https://api.waifu.pics/${req.url}';
+  if (req.url === '/neko' && req.method === 'GET') {
+    const url = 'https://api.waifu.pics/nsfw/neko';
 
     https.get(url, (response) => {
       let data = '';
