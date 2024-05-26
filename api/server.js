@@ -1,5 +1,5 @@
 const http = require('http');
-const anime = require('./docs/api/anime'); // anime.js dosyasını içe aktar
+const anime = require('./docs/apo/anime.js'); // anime.js dosyasını içe aktar
 
 const hostname = 'https://chapii.vercel.app/';
 const port = 3000;
