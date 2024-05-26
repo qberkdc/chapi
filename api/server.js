@@ -1,5 +1,5 @@
 const http = require('http');
-const anime = require('./anime'); // anime.js dosyasını içe aktar
+const anime = require('.docs/api/anime'); // anime.js dosyasını içe aktar
 
 const hostname = '127.0.0.1';
 const port = 3000;
