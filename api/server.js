@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require('http'); 
 const anime = require('./anime'); // anime.js dosyasını içe aktar
 
 const hostname = 'https://chapii.vercel.app/';
