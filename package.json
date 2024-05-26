@@ -1,12 +1,8 @@
 {
-  "name": "CH-Node",
+  "name": "ch-node-server",
   "version": "1.0.0",
-  "description": "Node JS App",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "vercel dev"
   },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "dependencies": {}
 }
