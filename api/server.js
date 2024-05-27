@@ -1,29 +1,37 @@
-const http = require('http'); 
-const anime = require('./anime'); // anime.js dosyasını içe aktar
-
-const hostname = '127.0.0.1';
+const express = require('express');
+const Jimp = require('jimp');
+const path = require('path');
+const app = express();
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/neko' && req.method === 'GET') {
-    anime.getAnimeImage((error, result) => {
-      if (error) {
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Internal Server Error');
-      } else {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(result));
-      }
-    });
-  } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('404 Not Found');
-  }
+// Bir endpoint oluşturuyoruz
+app.get('/add-text', async (req, res) => {
+    try {
+        // Resim dosyasının yolu
+        const imagePath = path.join(__dirname, 'path/to/image.jpg');
+        // Çıktı dosyasının yolu
+        const outputPath = path.join(__dirname, 'path/to/output.jpg');
+
+        // Resmi okuma
+        const image = await Jimp.read(imagePath);
+
+        // Fontu yükleme
+        const font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
+
+        // Yazıyı ekleme
+        image.print(font, 10, 10, 'Hello, World!');
+
+        // Yeni resmi kaydetme
+        await image.writeAsync(outputPath);
+
+        res.send('Resim üzerine yazı eklendi ve kaydedildi.');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Bir hata oluştu.');
+    }
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Sunucu http://${hostname}:${port}/ adresinde çalışıyor.`);
+// Sunucuyu başlatma
+app.listen(port, () => {
+    console.log(`Sunucu http://localhost:${port} adresinde çalışıyor.`);
 });
